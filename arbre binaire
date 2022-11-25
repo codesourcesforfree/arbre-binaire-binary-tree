@@ -1,0 +1,163 @@
+package arbrebinaire;
+
+
+public class ArbreBR {
+  private static int x = 0;
+int contenu;
+	  ArbreBR filsG, filsD;
+	private Object G;
+	public  ArbreBR(ArbreBR g, int c, ArbreBR d) 
+	  {
+	    filsG = g; 
+	    contenu = c; 
+	    filsD = d;}
+	public static ArbreBR composer(ArbreBR g, int c, ArbreBR d)
+	{
+	  return new ArbreBR(g, c, d);
+	}
+	public static int cle(ArbreBR a)
+	{
+	  return a.contenu;
+	}
+	public static ArbreBR filsfilsGauche(ArbreBR a)
+	{
+	  return a.filsG;
+	}
+	public static ArbreBR filsDroit(ArbreBR a)
+	{
+	  return a.filsD;
+	}
+
+
+	//recherched'un �l�ment
+	public static ArbreBR recherche(ArbreBR A, int x){
+		if(A==null) return null;
+		else if(A.contenu==x)return A;
+		else if(x>A.contenu) return recherche(A.filsD,x);
+		else return recherche(A.filsG,x);
+	}
+	//Insertion
+		public static ArbreBR Insert(ArbreBR A, int x){
+		ArbreBR A1=new ArbreBR(null,x,null);
+		ArbreBR A2=null, A3=A;
+		while(A3!=null){
+		A2=A3;
+		if(x< A3.contenu)A3=A3.filsG;
+		else A3=A3.filsD;
+		}
+		if(A==null) A=A1;
+		else if(A2.contenu>x)A2.filsG=A1;
+		else A2.filsD=A1;
+		return A;}
+		
+//Min etMax
+	public static ArbreBR Min(ArbreBR A){
+	if(A==null) return null;
+	else if(A.filsG==null)return A;
+	else return Min(A.filsG);
+	}
+	public static ArbreBR Max(ArbreBR A){
+	if(A==null) return null;
+	else if(A.filsD==null)return A;
+	else return Max(A.filsD);
+	} 
+
+//Successeur et pr�d�cesseur
+	static ArbreBR Succ(ArbreBR A, int x){
+	ArbreBR r=recherche(A,x);
+	if(r==null)return null;
+	else if(r.filsD==null) return null;
+	else return Min(r.filsD);
+	}
+	static ArbreBR Pred(ArbreBR A, int x){
+	ArbreBR r=recherche(A,x);
+	if(r==null)return null;
+	else if(r.filsG==null) return null;
+	else return Max(r.filsG);
+	}
+//parcour pRFIXE
+public static void parcoursPr�fixe(ArbreBR A) 
+{
+  if (A!= null)
+  {
+  System.out.print(A.contenu + " ---->");
+  parcoursPr�fixe(A.filsG);
+  parcoursPr�fixe(A.filsD);
+  }}
+//parcourinfixe
+public static void parcoursInfixe(ArbreBR A)       
+{
+  if (A!=null)
+   {
+  parcoursInfixe(A.filsG);
+  System.out.print(A.contenu + " ");
+  parcoursInfixe(A.filsD);
+     }
+}
+//parcourpostifxe
+public static void parcourspostfixe(ArbreBR A) 
+{
+  if (A!= null)
+    {
+  parcourspostfixe(A.filsG);
+  parcourspostfixe(A.filsD);
+  System.out.print(A.contenu + " ");
+     }
+}
+static ArbreBR SuppN(ArbreBR A, int x){
+	 ArbreBR b=A, p=null;
+	while(b!=null)
+	 if (b.x==x) break;
+	else {
+		 p=b;
+		 if (b.x>x)b=b.filsG;
+		 else b=b.filsD;
+		 }
+	 if (b!=null)
+	         if (b.filsG==null && b.filsD==null)
+		   {
+		   if (p==null) A=null;
+		   else if (p.filsG==b) p.filsG=null;
+		   else p.filsD=null;}
+	           else if (b.filsG==null || b.filsD==null){
+		    ArbreBR f;
+		    if (b.filsG == null) f=b.filsD;
+		    else f=b.filsG;
+		   if (p==null) A=f;
+		  else if (p.filsG==b) p.filsG=f;
+		  else p.filsD=f;
+		 }
+	         else {
+		 ArbreBR m=Min(b.filsD);
+		 b.x=m.x;
+		 SuppN2(b.filsD,b,m.x);
+		 }
+		return A;
+		}
+static void SuppN2(ArbreBR A,ArbreBR per, int x){
+	 ArbreBR b=A,p=per;
+	while(b!=null)
+		  if (b.x==x) break;
+		  else {
+		   p=b;
+		   if (b.x>x)b=b.filsG;
+		   else b=b.filsD;
+		  }
+		 if (b!=null)
+		 if (b.filsG==null && b.filsD==null)
+		 {
+		  if (p==null) b=null;
+		  else if (p.filsG==b) p.filsG=null;
+		  else p.filsD=null;}
+		  else if (b.filsG==null || b.filsD==null){
+		  ArbreBR f;
+		  if (b.filsG == null) f=b.filsD;
+		  else f=b.filsG;
+		  if (p==null) b=f;
+		  else if (p.filsG==b) p.filsG=f;
+		  else p.filsD=f;
+		  }
+		 }
+
+
+}
