@@ -1,0 +1,119 @@
+package arbrebinaire;
+import java.util.Scanner;
+
+public class test {
+		static void menu(){
+		
+			System.out.println("\n-----------------------------------");
+			System.out.println("-----les ArbreBRs binaires de recherche----");
+			System.out.println("-----------------------------------");
+			System.out.println("1:insertion -------------------");
+			System.out.println("2:recherche----------------");
+			System.out.println("3:MIN ------------------------");
+			System.out.println("4:MAX--------------------");
+			System.out.println("5:Pr�d�cesseur -------------------");
+			System.out.println("6:successeur ------------------------");
+			System.out.println("7:parcours infixe--------------------");
+			System.out.println("8:parcour prefixe ------------------------");
+		System.out.println("9:parcour postfixe ------------------------");
+		System.out.println("10:supression------------------------");}
+
+
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+			 ArbreBR A=null;
+		        int ch,x,j;
+		        do{
+		        	menu();
+		    		System.out.println("Donner votre choix:");
+		    		Scanner clavier11 = new Scanner(System.in);
+		            ch=clavier11.nextInt( );
+		            switch (ch){
+		            case 1:
+		            	System.out.println(" Insert un nouveau noeud :");
+		        		System.out.println("Donner un nombre :");
+		        		Scanner clavier2  = new Scanner(System.in);
+		        		x=clavier2.nextInt();
+		        		A=ArbreBR.Insert(A, x);
+		        		//ArbreBR.parcoursInfixe(A);
+		             break;     
+		            case 2:
+		            	System.out.println("Recherche d'un �l�ment :");
+		            	System.out.println("Donner l'�l�ment recherch� :");
+		            	Scanner clavier1 = new Scanner(System.in);
+		                x=clavier1.nextInt();
+		            	ArbreBR k=ArbreBR.recherche(A, x);
+	if (k==null)System.out.println("l'�l�ment recherch� :"+x+" n'est pas trouv�.");
+	else System.out.println("l'�l�ment recherch� :"+x+" est trouv�.");
+	break;
+		        case 3:
+	            	System.out.println(" Le minimun de cet ArbreBR est :");
+	        		ArbreBR mineur =ArbreBR.Min(A);
+if (mineur==null)System.out.println("pas de mienur car l'ArbreBR est vide.");
+else System.out.println("le min de cet ArbreBR = :" +ArbreBR.cle(mineur) );
+	             break;
+	            case 4:
+	             System.out.println(" Le minimun de cet ArbreBR est :");
+	        		ArbreBR maxi =ArbreBR.Max(A);
+if (maxi==null)System.out.println("pas de maximum car l'ArbreBR est vide.");
+else System.out.println("le max de cet ArbreBR = :" +ArbreBR.cle(maxi) );
+	        		 break;
+	            case 5:
+	            	System.out.println(" vous chercher le noeud qui pr�c�de  :");
+	        		System.out.println("Donner un nombre :");
+	        		Scanner clavier3  = new Scanner(System.in);
+	        		x=clavier3.nextInt();
+	        		ArbreBR p=ArbreBR.Pred(A, x);
+if (p==null)System.out.println("  pas de pr�d�cesseur   ");
+else System.out.println(" le pr�decesseur de  " + x +  "est" + ArbreBR.cle(p));
+	        		//ArbreBR.parcoursInfixe(A);
+	        		break;
+	            case 6:
+	        	System.out.println(" vous chercher  le successeur de   :");
+	        		System.out.println("Donner un nombre :");
+	        		Scanner clavier4  = new Scanner(System.in);
+	        		x=clavier4.nextInt();
+	        		ArbreBR S=ArbreBR.Succ(A, x);
+	        	if (S==null)System.out.println("AUCUN  seccesseur   "+ x);
+	else System.out.println( " le successeur de  " +  x+ "est" + ArbreBR.cle(S));
+	        		//ArbreBR.parcoursInfixe(A);
+	        		break;
+	            case 7:
+	            	System.out.println(" Affichage en infixe ");
+	            	ArbreBR.parcoursInfixe(A);
+	             break;
+	            case 8:
+	            	System.out.println("Affichage en prefixe");
+	            	ArbreBR.parcoursPr�fixe(A);
+	            	break;
+	            case 10:
+	            	System.out.println("donner un nombre");
+	            	Scanner S1=new Scanner(System.in);
+	            	x=S1.nextInt();
+	            	ArbreBR A1 = ArbreBR.recherche(A, x);
+	            	if(A1==null)System.out.println("element n'est pas trouve");
+	            	else {
+	            		A=test.SuppN(x,A);
+	            	System.out.println("element est supprime");
+	            	}
+	            			
+	            	break;
+	            	}
+		      
+	          
+	     	        }while (ch>=1 && ch<=10);
+	        
+		        
+}
+
+
+
+
+	private static ArbreBR SuppN(int x, ArbreBR a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
